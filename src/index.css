@@ -1,0 +1,120 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  max-width: 100%;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  color: #007BFF;
+  margin-bottom: 2rem;
+}
+
+/* Form Styles */
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Log List Styles */
+.log-list {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.log-list h2 {
+  margin-bottom: 1rem;
+}
+
+.log-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.log-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.log-list li:last-child {
+  border-bottom: none;
+}
+
+.log-list li strong {
+  color: #007BFF;
+}
+
+@media (max-width: 768px) {
+  form, .log-list {
+    padding: 15px;
+  }
+
+  button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .form-group input {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
