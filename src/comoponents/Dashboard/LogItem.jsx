@@ -5,7 +5,7 @@ import {format} from "date-fns"
 
 const LogItem = ({ log }) => (
   <li>
-    <strong>{format(new Date(log.dateAdded), "do MMM yy - HH:mm")}</strong> - {log.name} - {log.location} - {log.breed} - {log.weight} lbs
+    <strong>{format(new Date(log.createdAt), "do MMM yy - HH:mm")}</strong> - {log.name} - {log.location} - {log.breed} - {log.weight} lbs
   </li>
 );
 
