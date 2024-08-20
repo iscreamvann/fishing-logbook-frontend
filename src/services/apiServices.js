@@ -24,7 +24,8 @@ export const api = {
     },
     post: async (url, body) => {
         const response = await fetch(`${baseUrl}${url}`, {headers: {
-            "Authorization": `Bearer ${getToken()}`
+            "Authorization": `Bearer ${getToken()}`,
+            "content-type": "application/json"
         },
         method: "POST",
         body: JSON.stringify(body)

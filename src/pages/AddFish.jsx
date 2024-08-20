@@ -18,7 +18,7 @@ const CreateProfile = () => {
     // Simple validation
     if (name && breed && weight && location && catchBait) {
         console.log("data:", name, breed, weight, location, catchBait)
-        const response = await api.post("/fish", { name, breed, weight, location, catchBait})
+        const response = await api.post("/fish", { name, breed, weight: parseFloat(weight), location, catchBait})
         console.log("response:", response)
       // Redirect to login page after profile creation
       navigate('/dashboard');
