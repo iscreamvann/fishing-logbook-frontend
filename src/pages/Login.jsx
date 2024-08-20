@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {setToken} from "../services/apiServices"
+import {styled} from "styled-components"
+
+const ErrorMessageStyled = styled.span`
+color: red;
+display: block;
+margin: 10px 0;
+`
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,18 +18,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    const response = await fetch('http://127.0.0.1:5000/auth/login', {method: 'POST', body: JSON.stringify({username: email, password: password})})
+    const response = await fetch(`${import.meta.env.VITE_APP_API}/auth/login`, {method: 'POST', headers: {'content-type': "application/json", "accept": "*/*"}, body: JSON.stringify({email: email, password: password})})
     const responseJSON = await response.json()
-    console.log(responseJSON)
     if (responseJSON.token) {
+        setToken(responseJSON.token)
         navigate('/dashboard');
     }
+    else if(response.status === 401)
+      setError("Incorrect Combination")
     }
     catch(er) {
-    setError("Incorrect Combination")
-    }
-    // Simple validation
-    if (email && password) {
+      console.error(er)
+      setError("Error with API")
     }
   };
 
@@ -48,7 +56,7 @@ const Login = () => {
             required 
           />
         </div>
-        {error ? <span>{error}</span> : null}
+        {error ? <ErrorMessageStyled>{error}</ErrorMessageStyled> : null}
         <button type="submit">Login</button>
       </form>
     </div>
