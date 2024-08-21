@@ -7,9 +7,11 @@ import {Button} from "../components/Button"
 import { Link } from 'react-router-dom';
 
 const ErrorMessageStyled = styled.span`
-color: ${colors.indicator.red};
+color: red;
 display: block;
 margin: 10px 0;
+width: 400px;
+text-align: center;
 `
 
 const LoginWrapperStyled = styled.div`
@@ -43,6 +45,8 @@ align-items: center;
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -50,14 +54,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    const response = await fetch(`${import.meta.env.VITE_APP_API}/auth/login`, {method: 'POST', headers: {'content-type': "application/json"}, body: JSON.stringify({email: email, password: password})})
+    const response = await fetch(`${import.meta.env.VITE_APP_API}/auth/register`, {method: 'POST', headers: {'content-type': "application/json"}, body: JSON.stringify({email: email, firstName: firstName, lastName:lastName, password: password})})
     const responseJSON = await response.json()
     if (responseJSON.token) {
         setToken(responseJSON.token)
         navigate('/dashboard');
     }
-    else if(response.status === 401)
-      setError("Incorrect Combination")
+    else if(response.status !== 200)
+      setError(responseJSON.error)
     }
     catch(er) {
       console.error(er)
@@ -68,7 +72,7 @@ const Login = () => {
 
   return (
     <LoginWrapperStyled>
-      <h1>Reel Moments</h1>
+      <h1>Register</h1>
       <LoginFormStyled onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -76,6 +80,24 @@ const Login = () => {
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+        </div>
+        <div>
+          <label>First Name:</label>
+          <input 
+            type="text" 
+            value={firstName} 
+            onChange={(e) => setFirstName(e.target.value)} 
+            required 
+          />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input 
+            type="text" 
+            value={lastName} 
+            onChange={(e) => setLastName(e.target.value)} 
             required 
           />
         </div>
@@ -89,9 +111,9 @@ const Login = () => {
           />
         </div>
         {error ? <ErrorMessageStyled>{error}</ErrorMessageStyled> : null}
-        <Button type="submit">Login</Button>
+        <Button type="submit">Submit</Button>
         <span>or</span>
-        <Link to="/register" >Register</Link>
+        <Link to="/" >Login</Link>
       </LoginFormStyled>
     </LoginWrapperStyled>
   );

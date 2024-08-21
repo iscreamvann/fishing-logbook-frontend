@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
-import LogList from '../components/Dashboard/LogList';
+import LeadersList from '../components/Leaders/LeadersList';
 import LogStats from '../components/Dashboard/LogStats';
 import RecentActivity from '../components/Dashboard/RecentActivity';
 import {api} from "../services/apiServices"
@@ -11,27 +11,23 @@ import {MainStyled, AppStyled} from "../components/Main"
 
 const LoadingStyled = styled.div``
 
-const Dashboard = () => {
-    const [logs, setLogs] = React.useState([
+const Leaders = () => {
+    const [leaders, setLeaders] = React.useState([
     ]);
 
     const [isLoading, setIsLoading] = React.useState(true)
     const [error, setError] = React.useState(true)
 
-    const fetchFish = async () => {
-      const fish = await api.get("/fish")
+    const fetchLeaders = async () => {
+      const leaders = await api.get("/fish/leaderboard")
 
-      setLogs(fish.fish)
+      setLeaders(leaders.leaders)
       setIsLoading(false)
     }
 
-    const deleteFish = async (fishId) => {
-      const fish = await api.delete(`/fish/${fishId}`)
-      await fetchFish()
-    }
 
     React.useEffect(() => {
-      fetchFish()
+      fetchLeaders()
     }, [])
   
     return (
@@ -40,8 +36,7 @@ const Dashboard = () => {
         <Sidebar />
         <MainStyled>
           {isLoading ? <LoadingStyled>Loading...</LoadingStyled>: <>
-          <LogList logs={logs} deleteFish={deleteFish}/>
-          <LogStats logs={logs} />
+          <LeadersList leaders={leaders}/>
           </>
 }
         </MainStyled>
@@ -49,4 +44,4 @@ const Dashboard = () => {
     );
   };
   
-  export default Dashboard;
+  export default Leaders;

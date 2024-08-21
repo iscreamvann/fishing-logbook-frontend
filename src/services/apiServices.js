@@ -6,6 +6,10 @@ export const setToken = (value) => {
     CookiesObject.set('token', value)
 }
 
+export const deleteToken = () => {
+    CookiesObject.remove('token')
+}
+
 export const getToken = () => {
     return CookiesObject.get('token')
 }
@@ -29,6 +33,18 @@ export const api = {
         },
         method: "POST",
         body: JSON.stringify(body)
+    })
+
+        const responseJson = await response.json();
+
+        return responseJson;
+    },
+    delete: async (url) => {
+        const response = await fetch(`${baseUrl}${url}`, {headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "content-type": "application/json"
+        },
+        method: "DELETE"
     })
 
         const responseJson = await response.json();

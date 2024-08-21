@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {api} from "../services/apiServices"
-import { AppStyled, MainStyled } from '../comoponents/Main';
-import Sidebar from '../comoponents/Sidebar';
+import { AppStyled, MainStyled } from '../components/Main';
+import Sidebar from '../components/Sidebar';
+import {Button} from "../components/Button"
 
 const CreateProfile = () => {
   const [name, setName] = useState('');
@@ -80,7 +81,7 @@ const CreateProfile = () => {
             required 
           />
         </div>
-        <button type="submit">Add</button>
+        <Button type="submit">Add</Button>
       </form>
     </MainStyled>
     </AppStyled>
